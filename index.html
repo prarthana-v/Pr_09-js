@@ -10,7 +10,17 @@
 <body>
     <div class="container">
         <div class="row " id="cart">
-            <div id="cards" class="d-flex justify-content-around pt-5">
+            <div class="d-flex justify-content-between">
+                <div class="col-3">
+                    <h1>Cart</h1>
+                </div>
+                <div class="col-3">
+                   <a href="cart.html" onclick="cart()">
+                        <img src="assets/img/shopping-cart.png" style="width: 30px;height: 30px;" alt="" srcset="">
+                   </a>
+                </div>
+            </div>
+            <div id="cards" class="d-flex justify-content-around pt-5" >
 
             </div>
         </div>
@@ -53,15 +63,16 @@
 
         const view=()=>{
                 let listcard="";
-
+                let sum=0;
             product.map((val)=>{
+                
                 return (
                     listcard += `
                     <div class="card" style="width: 18rem;">
                         <img src="assets/img/${val.img}" class="card-img-top p-3" alt="...">
                         <div class="card-body">
                         <h6 class="card-title ">${val.name}</h6>
-                        <a href="#" class="btn btn-primary">Add to cart</a>
+                        <a href="#" class="btn btn-primary" onclick="addcart(${val.id})">Add to cart</a>
                         </div>
                     </div>
                 `
@@ -72,6 +83,18 @@
         }
 
         view();
+
+        let cart=[];
+        const addcart=(id)=>{
+            product.map((item)=>{
+                if(item.id==id){
+                    cart.push(item);
+                }
+            })
+            localStorage.setItem('cart',JSON.stringify(cart));
+            console.log(cart);
+            alert('Item added...');
+        }
     </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
